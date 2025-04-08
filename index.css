@@ -1,0 +1,135 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+.root-container {
+    width: 1240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+
+}
+
+.header {
+    background-color: #2b384f;
+    height: 261px;
+    width: 100%;
+    display: flex;
+}
+
+.photo {
+    height: 261px;
+    width: 262px;
+    display: block;
+    object-fit: cover;
+    object-position: 50% 23%;
+}
+
+.title-container {
+    margin-top: 106px;
+    margin-left: 50px;
+}
+
+.title {
+    color: #fff;
+    font-size: 52px;
+    font-weight: 300;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.contacts-container {
+    display: flex;
+    color: #6b7484;
+    font-size: 19px;
+    font-weight: 300;
+    gap: 10px;
+}
+
+.contacts-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.content-container {
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+}
+
+.left-side-container {
+    width: 825px;
+    border-right: 1px solid #959ca7;
+}
+
+.section {
+    padding: 0 50px 28px 50px;
+}
+
+.section-title {
+    margin: 0 0 10px 0;
+    color: #6b7484;
+    font-size: 31px;
+    font-weight: 300;
+}
+
+.section-content {
+    font-size: 21px;
+    font-weight: 300;
+    line-height: 1.1;
+    display: flex;
+    flex-direction: column;
+    gap: 43px;
+}
+
+.section-content ul {
+    margin: 0;
+}
+
+.separation {
+    border-bottom: 1px solid #959ca7;
+    width: 720px;
+    margin: 0 50px 27px 50px;
+
+}
+
+.employment-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.employment-title span {
+    font-weight: 500;
+}
+
+.sub-title {
+    color: #999495;
+}
+
+.links-container {
+    color: #999495;
+}
+
+.small {
+    width: 312px;
+}
+
+.soft-skills-container {
+    display: flex;
+    gap: 20px
+}
+
+.pet-project-part span {
+    font-weight: 500;
+}
+
+/* секондари текст #959ca7 */
+/* титл текст #6b7484 */
+/* саб титл текст #999495 */
