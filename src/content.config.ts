@@ -69,7 +69,12 @@ const projects = defineCollection({
     type: "content",
     schema: z.object({
         title: z.string(),
+        subtitle: z.string(),
         link: z.string().url().optional(),
+        from: z.coerce.date(),
+        to: z.coerce.date().optional(),
+        technologies: z.array(z.string()),
+        prio: z.number(),
     })
 });
 

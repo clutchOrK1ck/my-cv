@@ -18,21 +18,27 @@ const skills = await getEntry("skills", "skills");
 const links = await getEntry("links", "links");
 
 const employment = await Promise.all(
-	employmentCollection.map(async (job) => {
+	employmentCollection
+	.sort(( a, b ) => b.data.from.getTime() - a.data.from.getTime())
+	.map(async (job) => {
 		const { Content } = await job.render();
 		return { job, Content };
 	})
 );
 
 const education = await Promise.all(
-	educationCollection.map(async (educ) => {
+	educationCollection
+	.sort(( a, b ) => b.data.from.getTime() - a.data.from.getTime())
+	.map(async (educ) => {
 		const { Content } = await educ.render();
 		return { educ, Content };
 	})
 );
 
 const projects = await Promise.all(
-	projectsCollection.map(async (proj) => {
+	projectsCollection
+	.sort(( a, b ) => a.data.prio - b.data.prio)
+	.map(async (proj) => {
 		const { Content } = await proj.render();
 		return { proj, Content };
 	})
@@ -42,6 +48,21 @@ function prettyPrintDate(d?: Date) {
 	return d
 		? d.toLocaleDateString("en-US", { month: "short", year: "numeric" })
 		: "";
+}
+
+function formatPeriod(from: Date, to?: Date): string {
+	const fmt = new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric" });
+	const fromLabel = fmt.format(from);
+
+	// No end date => ongoing
+	if (!to) return `${fromLabel} - Present`;
+
+	// Same month and year => collapse
+	const sameMonth = from.getMonth() === to.getMonth();
+	const sameYear = from.getFullYear() === to.getFullYear();
+	if (sameMonth && sameYear) return fromLabel;
+
+	return `${fromLabel} - ${fmt.format(to)}`;
 }
 ---
 
@@ -94,7 +115,7 @@ function prettyPrintDate(d?: Date) {
 								<div class="employment-item">
 									<div class="employment-title">
 										<span>{job.data.title}</span>
-										<div class="dates">{prettyPrintDate(job.data.from)} - {prettyPrintDate(job.data.to)}</div>
+										<div class="dates">{formatPeriod(job.data.from, job.data.to)}</div>
 									</div>
 									<div class="sub-title">{job.data.company}</div>
 									<Content />
@@ -110,7 +131,7 @@ function prettyPrintDate(d?: Date) {
 								<div class="employment-item">
 									<div class="employment-title">
 										<span>{educ.data.title}</span>
-										<div class="dates">{prettyPrintDate(educ.data.from)} - {prettyPrintDate(educ.data.to)}</div>
+										<div class="dates">{formatPeriod(educ.data.from, educ.data.to)}</div>
 									</div>
 									<div class="sub-title">
 										{educ.data.institution}, {educ.data.location}
@@ -125,10 +146,14 @@ function prettyPrintDate(d?: Date) {
 						<h2 class="section-title">Project portfolio</h2>
 						<div class="section-content">
 							{projects.map(({ proj, Content }) => (
-								<div class="pet-project-item">
-									<a
-										href={proj.data.link}
-										target="_blank">{proj.data.title}</a>
+								<div class="employment-item">
+									<div class="employment-title">
+										<span>{proj.data.title}</span>
+										<div class="dates">{formatPeriod(proj.data.from, proj.data.to)}</div>
+									</div>
+									<div class="sub-title">
+										{proj.data.subtitle}
+									</div>
 									<Content />
 								</div>
 							))}
