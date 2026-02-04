@@ -65,6 +65,14 @@ const links = defineCollection({
     })
 });
 
+const projects = defineCollection({
+    type: "content",
+    schema: z.object({
+        title: z.string(),
+        link: z.string().url().optional(),
+    })
+});
+
 export const collections = {
     header,
     employment,
@@ -72,4 +80,5 @@ export const collections = {
     languages,
     skills,
     links,
+    projects
 };

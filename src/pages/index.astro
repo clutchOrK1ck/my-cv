@@ -12,6 +12,7 @@ import About from "../content/about.md";
 
 const employmentCollection = await getCollection("employment");
 const educationCollection = await getCollection("education");
+const projectsCollection = await getCollection("projects");
 const languages = await getEntry("languages", "languages");
 const skills = await getEntry("skills", "skills");
 const links = await getEntry("links", "links");
@@ -27,6 +28,13 @@ const education = await Promise.all(
 	educationCollection.map(async (educ) => {
 		const { Content } = await educ.render();
 		return { educ, Content };
+	})
+);
+
+const projects = await Promise.all(
+	projectsCollection.map(async (proj) => {
+		const { Content } = await proj.render();
+		return { proj, Content };
 	})
 );
 
@@ -116,133 +124,14 @@ function prettyPrintDate(d?: Date) {
 					<div class="section">
 						<h2 class="section-title">Pet projects</h2>
 						<div class="section-content">
-							<div class="pet-project-item">
-								<a
-									href="https://mpz-movie-searcher.netlify.app/"
-									target="_blank">Movie Searcher</a
-								>
-								<div class="pet-project-part">
-									<span>Description:</span> Web application for
-									searching movies using external API.
+							{projects.map(({ proj, Content }) => (
+								<div class="pet-project-item">
+									<a
+										href={proj.data.link}
+										target="_blank">{proj.data.title}</a>
+									<Content />
 								</div>
-								<div class="pet-project-part">
-									<span>Technologies:</span> React, JavaScript,
-									React Router, REST API
-								</div>
-								<div class="pet-project-part">
-									<span>Key features:</span>
-									<ul>
-										<li>
-											Movie search with automatic loading
-											of data by keywords.
-										</li>
-										<li>
-											Adaptive design for comfortable use
-											on various devices.
-										</li>
-										<li>
-											Error handling when working with API
-											and smooth operation of the
-											interface.
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="pet-project-item">
-								<a
-									href="https://mpz-movie-searcher.netlify.app/"
-									target="_blank">AMM Agency</a
-								>
-								<div class="pet-project-part">
-									<span>Description:</span> : A landing page for
-									a fictional agency showcasing development and
-									design skills
-								</div>
-								<div class="pet-project-part">
-									<span>Technologies:</span> React, React Transition
-									Group, React intersection observer
-								</div>
-								<div class="pet-project-part">
-									<span>Key features:</span>
-									<ul>
-										<li>
-											Cross-browser and adaptive layout.
-										</li>
-										<li>
-											Optimization of page loading speed.
-										</li>
-										<li>
-											Use of modern CSS animations and
-											transitions to improve user
-											experience.
-										</li>
-										<li>Multilingual.</li>
-									</ul>
-								</div>
-							</div>
-							<div class="pet-project-item">
-								<a
-									href="https://moonzpwr.github.io/goit-react-hw-03-image-finder/"
-									target="_blank">Image-finder</a
-								>
-								<div class="pet-project-part">
-									<span>Description:</span> : Image search app with
-									Pixabay API integration.
-								</div>
-								<div class="pet-project-part">
-									<span>Technologies:</span> : React, Axios, React
-									Router.
-								</div>
-								<div class="pet-project-part">
-									<span>Key features:</span>
-									<ul>
-										<li>
-											Implementation of infinite scroll
-											for easy viewing of results.
-										</li>
-										<li>
-											User-friendly interface with smooth
-											data loading.
-										</li>
-										<li>
-											Reactive search system using REST
-											API.
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="pet-project-item">
-								<a
-									href="https://mpz-movie-searcher.netlify.app/"
-									target="_blank">Star Wars Data Viewer</a
-								>
-								<div class="pet-project-part">
-									<span>Description:</span> An application for viewing
-									data about the Star Wars universe using an open
-									API.
-								</div>
-								<div class="pet-project-part">
-									<span>Technologies:</span>TypeScript, React,
-									React Router, React Testing Library
-								</div>
-								<div class="pet-project-part">
-									<span>Key features:</span>
-									<ul>
-										<li>
-											Dynamic loading of information about
-											characters, planets and ships.
-										</li>
-										<li>
-											Clean and minimalistic interface.
-										</li>
-										<li>
-											API error handling for stable
-											operation of the application.
-										</li>
-										<li>Testing.</li>
-									</ul>
-								</div>
-							</div>
+							))}
 						</div>
 					</div>
 				</div>
