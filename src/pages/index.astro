@@ -1,0 +1,282 @@
+---
+import IconMail from "../components/icons/IconMail.astro";
+import IconPhone from "../components/icons/IconPhone.astro";
+import IconLocation from "../components/icons/IconLocation.astro";
+
+import "../styles/main.css";
+
+import { getCollection, getEntry } from "astro:content";
+
+import { frontmatter as header } from "../content/header.md";
+import About from "../content/about.md";
+
+const employmentCollection = await getCollection("employment");
+const educationCollection = await getCollection("education");
+const languages = await getEntry("languages", "languages");
+const skills = await getEntry("skills", "skills");
+const links = await getEntry("links", "links");
+
+const employment = await Promise.all(
+	employmentCollection.map(async (job) => {
+		const { Content } = await job.render();
+		return { job, Content };
+	})
+);
+
+const education = await Promise.all(
+	educationCollection.map(async (educ) => {
+		const { Content } = await educ.render();
+		return { educ, Content };
+	})
+);
+
+function prettyPrintDate(d?: Date) {
+	return d
+		? d.toLocaleDateString("en-US", { month: "short", year: "numeric" })
+		: "";
+}
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="resume" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+			rel="stylesheet"
+		/>
+		<title>A.Yudenkov React Frontend dev.</title>
+	</head>
+	<body>
+		<div class="root-container">
+			<div class="header">
+				<img src="./photo.jpg" alt="avatar" class="photo" />
+				<div class="title-container">
+					<h1 class="title">{header.name}</h1>
+					<div class="contacts-container">
+						<div class="contacts-item">
+							<IconMail /> {header.email}
+						</div>
+						<div class="contacts-item">
+							<IconPhone /> {header.phone}
+						</div>
+						<div class="contacts-item">
+							<IconLocation /> {header.location}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content-container">
+				<div class="left-side-container">
+					<div class="section">
+						<h2 class="section-title">About me</h2>
+						<div class="section-content">
+							<About />
+						</div>
+					</div>
+					<div class="separation"></div>
+					<div class="section">
+						<h2 class="section-title">Employment</h2>
+						<div class="section-content">
+							{employment.map(({ job, Content }) => (
+								<div class="employment-item">
+									<div class="employment-title">
+										<span>{job.data.title}</span>
+										<div class="dates">{prettyPrintDate(job.data.from)} - {prettyPrintDate(job.data.to)}</div>
+									</div>
+									<div class="sub-title">{job.data.company}</div>
+									<Content />
+								</div>
+							))}
+						</div>
+					</div>
+					<div class="separation"></div>
+					<div class="section">
+						<h2 class="section-title">Education</h2>
+						<div class="section-content">
+							{education.map(({ educ, Content }) => (
+								<div class="employment-item">
+									<div class="employment-title">
+										<span>{educ.data.title}</span>
+										<div class="dates">{prettyPrintDate(educ.data.from)} - {prettyPrintDate(educ.data.to)}</div>
+									</div>
+									<div class="sub-title">
+										{educ.data.institution}, {educ.data.location}
+									</div>
+									<Content />
+								</div>
+							))}
+						</div>
+					</div>
+					<div class="separation"></div>
+					<div class="section">
+						<h2 class="section-title">Pet projects</h2>
+						<div class="section-content">
+							<div class="pet-project-item">
+								<a
+									href="https://mpz-movie-searcher.netlify.app/"
+									target="_blank">Movie Searcher</a
+								>
+								<div class="pet-project-part">
+									<span>Description:</span> Web application for
+									searching movies using external API.
+								</div>
+								<div class="pet-project-part">
+									<span>Technologies:</span> React, JavaScript,
+									React Router, REST API
+								</div>
+								<div class="pet-project-part">
+									<span>Key features:</span>
+									<ul>
+										<li>
+											Movie search with automatic loading
+											of data by keywords.
+										</li>
+										<li>
+											Adaptive design for comfortable use
+											on various devices.
+										</li>
+										<li>
+											Error handling when working with API
+											and smooth operation of the
+											interface.
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="pet-project-item">
+								<a
+									href="https://mpz-movie-searcher.netlify.app/"
+									target="_blank">AMM Agency</a
+								>
+								<div class="pet-project-part">
+									<span>Description:</span> : A landing page for
+									a fictional agency showcasing development and
+									design skills
+								</div>
+								<div class="pet-project-part">
+									<span>Technologies:</span> React, React Transition
+									Group, React intersection observer
+								</div>
+								<div class="pet-project-part">
+									<span>Key features:</span>
+									<ul>
+										<li>
+											Cross-browser and adaptive layout.
+										</li>
+										<li>
+											Optimization of page loading speed.
+										</li>
+										<li>
+											Use of modern CSS animations and
+											transitions to improve user
+											experience.
+										</li>
+										<li>Multilingual.</li>
+									</ul>
+								</div>
+							</div>
+							<div class="pet-project-item">
+								<a
+									href="https://moonzpwr.github.io/goit-react-hw-03-image-finder/"
+									target="_blank">Image-finder</a
+								>
+								<div class="pet-project-part">
+									<span>Description:</span> : Image search app with
+									Pixabay API integration.
+								</div>
+								<div class="pet-project-part">
+									<span>Technologies:</span> : React, Axios, React
+									Router.
+								</div>
+								<div class="pet-project-part">
+									<span>Key features:</span>
+									<ul>
+										<li>
+											Implementation of infinite scroll
+											for easy viewing of results.
+										</li>
+										<li>
+											User-friendly interface with smooth
+											data loading.
+										</li>
+										<li>
+											Reactive search system using REST
+											API.
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="pet-project-item">
+								<a
+									href="https://mpz-movie-searcher.netlify.app/"
+									target="_blank">Star Wars Data Viewer</a
+								>
+								<div class="pet-project-part">
+									<span>Description:</span> An application for viewing
+									data about the Star Wars universe using an open
+									API.
+								</div>
+								<div class="pet-project-part">
+									<span>Technologies:</span>TypeScript, React,
+									React Router, React Testing Library
+								</div>
+								<div class="pet-project-part">
+									<span>Key features:</span>
+									<ul>
+										<li>
+											Dynamic loading of information about
+											characters, planets and ships.
+										</li>
+										<li>
+											Clean and minimalistic interface.
+										</li>
+										<li>
+											API error handling for stable
+											operation of the application.
+										</li>
+										<li>Testing.</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="right-side-container">
+					<div class="section">
+						<h2 class="section-title">Personal details</h2>
+						<div class="section-content">
+							<div class="links-container">
+								{links.data.items.map((x) => (
+									<div>{x.title}</div>
+									<a href={x.link} target="_blank">Git</a>
+								))}
+							</div>
+						</div>
+					</div>
+					<div class="separation small"></div>
+					<div class="section">
+						<h2 class="section-title">Skills</h2>
+						<div class="section-content">
+							{skills.data.items.map((x) => (
+								<div>{x}</div>
+							))}
+						</div>
+					</div>
+					<div class="section">
+						<h2 class="section-title">Languages</h2>
+						<div class="section-content">
+							{languages.data.items.map((x) => (
+								<div>{x.language} - {x.level}</div>
+							))}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

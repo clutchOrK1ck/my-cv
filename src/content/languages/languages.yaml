@@ -1,0 +1,9 @@
+items:
+    - language: English
+      level: fluent
+    - language: German
+      level: conversational
+    - language: Ukrainian
+      level: native
+    - language: Russian
+      level: native

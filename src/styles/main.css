@@ -13,7 +13,6 @@ body {
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
-
 }
 
 .header {
@@ -97,7 +96,6 @@ body {
     border-bottom: 1px solid #959ca7;
     width: 720px;
     margin: 0 50px 27px 50px;
-
 }
 
 .employment-title {
@@ -129,7 +127,3 @@ body {
 .pet-project-part span {
     font-weight: 500;
 }
-
-/* секондари текст #959ca7 */
-/* титл текст #6b7484 */
-/* саб титл текст #999495 */
