@@ -145,3 +145,20 @@ body {
 .pet-project-part span {
     font-weight: 500;
 }
+
+.tech-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.pill {
+    font-size: 15px;
+    font-weight: 400;
+    color: #6b7484;
+    border: 1px solid #c6cbd3;
+    padding: 3px 8px;
+    border-radius: 999px;
+    line-height: 1.1;
+}

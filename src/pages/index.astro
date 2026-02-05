@@ -142,12 +142,22 @@ function formatPeriod(from: Date, to?: Date): string {
 						<div class="section-content">
 							{projects.map(({ proj, Content }) => (
 								<div class="employment-item">
+									<!-- project title -->
 									<div class="employment-title">
 										<span>{proj.data.title}</span>
 										<div class="dates">{formatPeriod(proj.data.from, proj.data.to)}</div>
 									</div>
+
+									<!-- project sub-title -->
 									<div class="sub-title">
 										{proj.data.subtitle}
+									</div>
+
+									<!-- project tech stack -->
+									<div class="tech-pills">
+										{proj.data.technologies.map(( tech ) => (
+											<span class="pill">{tech}</span>
+										))}
 									</div>
 									<Content />
 								</div>
