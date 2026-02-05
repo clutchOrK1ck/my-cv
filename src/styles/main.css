@@ -24,14 +24,14 @@ body {
 
 .photo {
     height: 261px;
-    width: 262px;
+    width: 220px;
     display: block;
     object-fit: cover;
     object-position: 50% 55%;
 }
 
 .title-container {
-    margin-top: 106px;
+    margin-top: 40px;
     margin-left: 50px;
 }
 
@@ -40,7 +40,6 @@ body {
     font-size: 52px;
     font-weight: 300;
     margin: 0;
-    margin-bottom: 10px;
 }
 
 .contacts-container {
@@ -49,6 +48,7 @@ body {
     font-size: 19px;
     font-weight: 300;
     gap: 10px;
+    margin-top: 50px;
 }
 
 .contacts-item {
@@ -88,6 +88,16 @@ body {
     gap: 43px;
 }
 
+.right-side-section-content {
+    font-size: 21px;
+    font-weight: 300;
+    line-height: 1.1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
 .section-content ul {
     margin: 0;
 }
@@ -109,6 +119,14 @@ body {
 
 .sub-title {
     color: #999495;
+}
+
+.professional-title {
+    color: #6b7484;
+    margin: 0px;
+    font-weight: 400;
+    font-size: 26px;
+    margin-bottom: 10px;
 }
 
 .links-container {
