@@ -1,0 +1,59 @@
+---
+import QRCode from "qrcode";
+
+interface Props {
+  link: string;
+  text: string;
+  width?: number;
+}
+
+const { link, text, width = 220 } = Astro.props;
+
+// inner padding + label space
+const qrCodePadding = 4;
+const borderRadius = 4;
+const gap = 3;
+
+// QR size inside the frame
+const qrSize = width - qrCodePadding * 2;
+
+// generate SVG at build time
+const svg = await QRCode.toString(link, {
+  type: "svg",
+  width: qrSize,
+  margin: 0.8,
+  errorCorrectionLevel: "M",
+  color: {
+    dark: "#2b384f",
+    light: "#ffffff"
+  }
+});
+---
+
+<div style={`width:${width}px; display:flex; flex-direction:column; gap:${gap}px;`}>
+
+  <!-- QR frame -->
+  <div style={`
+    border-radius:${borderRadius}px;
+    border:1px solid #e5e7eb;
+    padding:${qrCodePadding}px;
+    background:white;
+  `}>
+    <Fragment set:html={svg} />
+  </div>
+
+  <!-- label frame -->
+  <div style={`
+    border-radius:${borderRadius}px;
+    padding:0px;
+    background:none;
+    color:white;
+    text-align:center;
+    font-size:0.86rem;
+    font-weight:bold;
+  `}>
+    {text}
+  </div>
+
+</div>
+

@@ -2,6 +2,7 @@
 import IconMail from "../components/icons/IconMail.astro";
 import IconPhone from "../components/icons/IconPhone.astro";
 import IconLocation from "../components/icons/IconLocation.astro";
+import QRWidget from "../components/icons/QRWidget.astro";
 
 import "../styles/main.css";
 
@@ -80,7 +81,7 @@ function formatPeriod(from: Date, to?: Date): string {
 				<img src="./photo.jpg" alt="avatar" class="photo" />
 				<div class="title-container">
 					<h1 class="title">{header.name}</h1>
-					<h2 class="professional-title">Game developer (C++, Unreal Engine, UE Blueprints)</h2>
+					<h2 class="professional-title">{header.professionalTitle}</h2>
 					<div class="contacts-container">
 						<div class="contacts-item">
 							<IconMail /> {header.email}
@@ -92,6 +93,9 @@ function formatPeriod(from: Date, to?: Date): string {
 							<IconLocation /> {header.location}
 						</div>
 					</div>
+				</div>
+				<div class="qr-code">
+					<QRWidget link={header.portfolioLink} text={header.portfolioLink.replace("https://", "")} width={160} />
 				</div>
 			</div>
 			<div class="content-container">

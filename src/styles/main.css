@@ -30,6 +30,11 @@ body {
     object-position: 50% 55%;
 }
 
+.qr-code {
+    align-self: center;
+    margin-left: 45px;
+}
+
 .title-container {
     margin-top: 40px;
     margin-left: 50px;
