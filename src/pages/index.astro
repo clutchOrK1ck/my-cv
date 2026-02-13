@@ -84,18 +84,18 @@ function formatPeriod(from: Date, to?: Date): string {
 					<h2 class="professional-title">{header.professionalTitle}</h2>
 					<div class="contacts-container">
 						<div class="contacts-item">
-							<IconMail /> {header.email}
+							<IconMail size=15 /> {header.email}
 						</div>
 						<div class="contacts-item">
-							<IconPhone /> {header.phone}
+							<IconPhone size=15 /> {header.phone}
 						</div>
 						<div class="contacts-item">
-							<IconLocation /> {header.location}
+							<IconLocation size=15 /> {header.location}
 						</div>
 					</div>
 				</div>
 				<div class="qr-code">
-					<QRWidget link={header.portfolioLink} text={header.portfolioLink.replace("https://", "")} width={160} />
+					<QRWidget link={header.portfolioLink} />
 				</div>
 			</div>
 			<div class="content-container">
@@ -111,12 +111,12 @@ function formatPeriod(from: Date, to?: Date): string {
 						<h2 class="section-title">Employment</h2>
 						<div class="section-content">
 							{employment.map(({ job, Content }) => (
-								<div class="employment-item">
-									<div class="employment-title">
+								<div class="history-item">
+									<div class="history-item-title">
 										<span>{job.data.title}</span>
 										<div class="dates">{formatPeriod(job.data.from, job.data.to)}</div>
 									</div>
-									<div class="sub-title">{job.data.company}</div>
+									<div class="history-item-subtitle">{job.data.company}</div>
 									<Content />
 								</div>
 							))}
@@ -127,12 +127,12 @@ function formatPeriod(from: Date, to?: Date): string {
 						<h2 class="section-title">Education</h2>
 						<div class="section-content">
 							{education.map(({ educ, Content }) => (
-								<div class="employment-item">
-									<div class="employment-title">
+								<div class="history-item">
+									<div class="history-item-title">
 										<span>{educ.data.title}</span>
 										<div class="dates">{formatPeriod(educ.data.from, educ.data.to)}</div>
 									</div>
-									<div class="sub-title">
+									<div class="history-item-subtitle">
 										{educ.data.institution}, {educ.data.location}
 									</div>
 									<Content />
@@ -145,15 +145,15 @@ function formatPeriod(from: Date, to?: Date): string {
 						<h2 class="section-title">Project portfolio</h2>
 						<div class="section-content">
 							{projects.map(({ proj, Content }) => (
-								<div class="employment-item">
+								<div class="history-item">
 									<!-- project title -->
-									<div class="employment-title">
+									<div class="history-item-title">
 										<span>{proj.data.title}</span>
 										<div class="dates">{formatPeriod(proj.data.from, proj.data.to)}</div>
 									</div>
 
 									<!-- project sub-title -->
-									<div class="sub-title">
+									<div class="history-item-subtitle">
 										{proj.data.subtitle}
 									</div>
 

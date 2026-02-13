@@ -3,24 +3,18 @@ import QRCode from "qrcode";
 
 interface Props {
   link: string;
-  text: string;
-  width?: number;
 }
 
-const { link, text, width = 220 } = Astro.props;
+const { link } = Astro.props;
 
 // inner padding + label space
 const qrCodePadding = 4;
 const borderRadius = 4;
-const gap = 3;
-
-// QR size inside the frame
-const qrSize = width - qrCodePadding * 2;
+const gap = 1;
 
 // generate SVG at build time
 const svg = await QRCode.toString(link, {
   type: "svg",
-  width: qrSize,
   margin: 0.8,
   errorCorrectionLevel: "M",
   color: {
@@ -30,7 +24,7 @@ const svg = await QRCode.toString(link, {
 });
 ---
 
-<div style={`width:${width}px; display:flex; flex-direction:column; gap:${gap}px;`}>
+<div style={`display:flex; flex-direction:column; gap:${gap}mm;`}>
 
   <!-- QR frame -->
   <div style={`
@@ -49,10 +43,10 @@ const svg = await QRCode.toString(link, {
     background:none;
     color:white;
     text-align:center;
-    font-size:0.86rem;
+    font-size:0.69rem;
     font-weight:bold;
   `}>
-    {text}
+    View My Portfolio
   </div>
 
 </div>
