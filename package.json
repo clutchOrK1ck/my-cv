@@ -5,12 +5,14 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "build:pdf": "astro build && node scripts/generate-pdf.mjs",
+    "generate-pdf": "node scripts/generate-pdf.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "astro": "^5.17.1",
+    "dayjs": "^1.11.19",
+    "minimist": "^1.2.8",
     "qrcode": "^1.5.4"
   },
   "devDependencies": {
