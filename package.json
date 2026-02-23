@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "generate-pdf": "node scripts/generate-pdf.mjs",
+    "build:pdf": "npm run build && npm run generate-pdf",
     "preview": "astro preview",
     "astro": "astro"
   },

@@ -10,4 +10,4 @@ technologies:
 prio: 0
 ---
 
-IGNI (the name is inspired by one of the Witcher's magic signs) is a console application and a set of Python scripts for Unreal Engine Python environment that allow to transport various game assets from the Witcher 1 game into Unreal Engine 5
+IGNI is a console application and a set of Python scripts for Unreal Engine Python environment that allow to transport various game assets from the Witcher 1 game into Unreal Engine 5
